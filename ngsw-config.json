@@ -1,0 +1,49 @@
+{
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      //prefetch: se Fuerza el guardado del cache desde un inicio
+      //lazy: Cargar los datos al cache cuando se es necesario
+      "installMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html",
+          "/*.css",
+          "/*.js"
+        ]
+      }
+    }, {
+      "name": "assets",
+      "installMode": "lazy",
+      //UpdateMode - prefetch: Trae los archivos del cache
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/**"
+        ]
+      }
+    }
+  ],
+  "dataGroups" : [
+    {
+      "name": "ReditApi",
+      "urls": [
+        "https://reddit.com/r/pics.json",
+        "https://reddit.com/r/**"
+      ],
+      "cacheConfig": {
+        //Performance : Actualiza unicamente Cuando no encuentre un archivo o cuando este dañado
+        //Freshness: Contenido Actualizado (Cuando hay una demora de carga de un poco mas de 3 segs (Tiempo definido)
+        "strategy": "freshness",
+        //Actualiza los datos cada tanto
+        "maxAge": "1d",
+        //Define el limite de datos
+        "maxSize": 100,
+//        Define el timepo de carga previo antes de traer el cache (recomendable para el uso del freshness)
+        "timeout": "3s"
+      }
+    }
+  ]
+}
